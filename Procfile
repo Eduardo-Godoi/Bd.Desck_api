@@ -1,1 +1,1 @@
-web: gunicorn bddesck.wsgi --log-file -
+web: gunicorn bddesck.wsgi
