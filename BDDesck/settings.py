@@ -19,11 +19,11 @@ from environs import Env
 env = Env()
 env.read_env()
 
-DB_NAME = env('DB_NAME')
-DB_USER = env('DB_USER')
-DB_PWD = env('DB_PWD')
-DB_HOST = env('DB_HOST')
-DB_PORT = env('DB_PORT')
+DB_NAME = os.environ.get('DB_NAME')
+DB_USER = os.environ.get('DB_USER')
+DB_PWD = os.environ.get('DB_PWD')
+DB_HOST = os.environ.get('DB_HOST')
+DB_PORT = os.environ.get('DB_PORT')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
