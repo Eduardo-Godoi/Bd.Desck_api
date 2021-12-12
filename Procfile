@@ -1,1 +1,1 @@
-web: gunicorn bd_desck.wsgi
+web: gunicorn django_project.wsgi
