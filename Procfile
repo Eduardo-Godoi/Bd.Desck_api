@@ -1,1 +1,1 @@
-web: gunicorn bddesck.wsgi
+web: gunicorn BDDesck.wsgi
