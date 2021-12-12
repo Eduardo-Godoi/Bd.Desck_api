@@ -1,0 +1,1 @@
+web: gunicorn bd_desck.wsgi
