@@ -15,7 +15,6 @@ class CreateUserView(GenericViewSet, CreateModelMixin):
     serializer_class = UserSerializer
 
     def get_serializer(self, *args, **kwargs):
-        import pdb
 
         zip_code = self.request.data.get('zip_code', None)
         public_area = self.request.data.get('public_area', None)
@@ -32,8 +31,6 @@ class CreateUserView(GenericViewSet, CreateModelMixin):
             'city': city,
             'state': state
         }
-
-        # pdb.set_trace()
 
         return super().get_serializer(*args, **kwargs)
 

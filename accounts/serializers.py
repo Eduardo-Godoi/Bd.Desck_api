@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.response import Response
 
 from accounts.models import Address, User
 
@@ -10,13 +9,14 @@ class AddressSerializer(serializers.ModelSerializer):
         model = Address
         fields = '__all__'
 
+
 class UserSerializer(serializers.ModelSerializer):
 
     address = AddressSerializer()
 
     class Meta:
         model = User
-        fields = ['id', 'full_name', 'email','username', 'address', 'password']
+        fields = ['id', 'full_name', 'email', 'username', 'address', 'password']
 
         extra_kwargs = {
             'id': {
@@ -27,14 +27,10 @@ class UserSerializer(serializers.ModelSerializer):
             }
         }
 
-
-
     def create(self, validate_data):
-        import pdb
         address_serialized = AddressSerializer(data=validate_data.pop('address'))
         address_serialized.is_valid(raise_exception=True)
         address = address_serialized.save()
-
 
         return User.objects.create_user(**validate_data, address=address)
 
