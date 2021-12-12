@@ -76,6 +76,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'https://bd-desck.vercel.app'
+    'https://bddesck.herokuapp.com/api/'
     'http://localhost:3000',
     'http://localhost:8000',
     'http://localhost:8080',
