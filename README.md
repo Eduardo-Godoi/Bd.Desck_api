@@ -13,7 +13,7 @@ DB.desck é um sistema simples de registro e autenticação de usuários.
 #### **Clonando o Projeto:**
 
 ```
-git clone https://gitlab.com/eduardogodoi/bd_desck_back
+git@github.com:Eduardo-Godoi/Bd.Desck_api.git
 ```
 
 #### **Depois de clonado entre na pasta do projeto:**
