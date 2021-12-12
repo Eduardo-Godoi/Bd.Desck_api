@@ -73,7 +73,7 @@ class LoginViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('token', response.json())
 
-    def test_login_invalid_credentials(self):
+    def test_login_invalid_password(self):
         login_data = {
             'username': 'nill12',
             'password': '12'

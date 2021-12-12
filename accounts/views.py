@@ -5,6 +5,7 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from accounts.models import User
 from accounts.serializers import LoginSerializer, UserSerializer
@@ -35,17 +36,34 @@ class CreateUserView(GenericViewSet, CreateModelMixin):
         return super().get_serializer(*args, **kwargs)
 
 
-class LoginUserVIew(APIView):
+# class LoginUserVIew(APIView):
 
-    def post(self, request):
-        login_serializer = LoginSerializer(data=request.data)
-        login_serializer.is_valid(raise_exception=True)
+#     def post(self, request):
+#         login_serializer = LoginSerializer(data=request.data)
+#         login_serializer.is_valid(raise_exception=True)
 
-        user = authenticate(**login_serializer.validated_data)
+#         user = authenticate(**login_serializer.validated_data)
+
+#         if user:
+#             token, _ = Token.objects.get_or_create(user=user)
+
+#             return Response({'token': token.key})
+
+#         return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class LoginUserVIew(TokenObtainPairView):
+    serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+
+        user = authenticate(**request.data)
 
         if user:
-            token, _ = Token.objects.get_or_create(user=user)
-
-            return Response({'token': token.key})
-
+            login_serializer = self.serializer_class(data=request.data)
+            if login_serializer.is_valid():
+                return Response({
+                    'token': login_serializer.validated_data.get('access'),
+                    'refresh-token': login_serializer.validated_data.get('refresh'),
+                }, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)

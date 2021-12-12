@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from accounts.models import Address, User
 
@@ -35,6 +36,5 @@ class UserSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validate_data, address=address)
 
 
-class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
+class LoginSerializer(TokenObtainPairSerializer):
+    ...
