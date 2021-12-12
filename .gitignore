@@ -1,5 +1,5 @@
 venv
-*pyc
+*.pyc
 *.sqlite3
 __pycache__
 *.vscode
